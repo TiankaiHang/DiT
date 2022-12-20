@@ -105,6 +105,10 @@ def main(cfg_scale=1.25):
         samples, _ = samples.chunk(2, dim=0)  # Remove null class samples
         samples = vae.decode(samples / 0.18215).sample
 
+        samples = ((samples + 1) * 127.5).clamp(0, 255).to(torch.uint8)
+        samples = samples.permute(0, 2, 3, 1)
+        samples = samples.contiguous()
+
         samples = concat_all_gather(samples).cpu().numpy()
         labels = concat_all_gather(class_labels).cpu().numpy()
         all_samples.append(samples)

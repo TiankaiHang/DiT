@@ -1,7 +1,9 @@
-set -ex
+set -x
 
 pip install diffusers timm accelerate
 
+git clone https://github.com/TiankaiHang/DiT.git
+cd DiT
 torchrun --standalone --nproc_per_node=8 sample.py 1.25
 
 git clone https://github.com/openai/guided-diffusion.git

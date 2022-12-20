@@ -59,10 +59,10 @@ def main(cfg_scale=1.25):
     torch.manual_seed(dist.get_rank())
     torch.set_grad_enabled(False)
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    num_sampling_steps = 25
+    num_sampling_steps = 250
     # cfg_scale = 1.5
-    batch_size = 8
-    num_samples = 500
+    batch_size = 16
+    num_samples = 50000
     all_samples = []
     all_labels = []
 
